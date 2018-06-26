@@ -14,10 +14,10 @@ namespace Snake
       Console.SetBufferSize(80, 25);
 
       // Отрисовка рамочки
-      HorisontalLine lineUp = new HorisontalLine(0, 78 , 0, '+');
+      HorizontalLine lineUp = new HorizontalLine(0, 78 , 0, '+');
       lineUp.Drow();
 
-      HorisontalLine lineDown = new HorisontalLine(0, 78, 24, '+');
+      HorizontalLine lineDown = new HorizontalLine(0, 78, 24, '+');
       lineDown.Drow();
 
       VerticalLine lineLeft = new VerticalLine(0, 24, 0, '+');
