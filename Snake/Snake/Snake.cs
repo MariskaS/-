@@ -10,11 +10,11 @@ namespace Snake
   {
     Direction direction;
 
-    public Snake(Point tail, int lenght, Direction _direction)
+    public Snake(Point tail, int length, Direction _direction)
     {
       direction = _direction;
       pList = new List<Point>();
-      for (int i = 0; i < lenght; i++)
+      for (int i = 0; i < length; i++)
       {
         Point p = new Point(tail);
         p.Move(i, direction);
@@ -22,29 +22,34 @@ namespace Snake
       }
     }
 
-    internal void Move()
+    public void Move()
     {
-      Point tail = pList.First(); // метод First - возвращает первый элемент списка
+      Point tail = pList.First();
       pList.Remove(tail);
-      Point head = GetNextPoint(); // перевменна head заполнится значением которое вернет фу-ия GetNextPoint()
+      Point head = GetNextPoint();
       pList.Add(head);
 
       tail.Clear();
       head.Draw();
     }
 
-    internal void Draw()
-    {
-      throw new NotImplementedException();
-    }
-
-    // Метод вычисляеи=т в какой точке змейка окажется в следующий момент
     public Point GetNextPoint()
     {
       Point head = pList.Last();
       Point nextPoint = new Point(head);
       nextPoint.Move(1, direction);
       return nextPoint;
+    }
+
+    public bool IsHitTail()
+    {
+      var head = pList.Last();
+      for (int i = 0; i < pList.Count - 2; i++)
+      {
+        if (head.IsHit(pList[i]))
+          return true;
+      }
+      return false;
     }
 
     public void HandleKey(ConsoleKey key)
@@ -59,10 +64,9 @@ namespace Snake
         direction = Direction.UP;
     }
 
-    internal bool Eat(Point food)
+    public bool Eat(Point food)
     {
       Point head = GetNextPoint();
-      // если голова змеи на следующем ходу окажется там где находится еда
       if (head.IsHit(food))
       {
         food.sym = head.sym;
