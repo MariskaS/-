@@ -46,6 +46,12 @@ namespace Snake
       }
     }
 
+    // проверка на равенство координат
+    public bool IsHit(Point p)
+    {
+      return p.x == this.x && p.y == this.y;
+    }
+
     // Show point in console
     public void Draw() // void - ключевое слово, означает что функция ничего не возвращает
     {

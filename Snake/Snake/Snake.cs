@@ -33,6 +33,12 @@ namespace Snake
       head.Draw();
     }
 
+    internal void Draw()
+    {
+      throw new NotImplementedException();
+    }
+
+    // Метод вычисляеи=т в какой точке змейка окажется в следующий момент
     public Point GetNextPoint()
     {
       Point head = pList.Last();
@@ -51,6 +57,20 @@ namespace Snake
         direction = Direction.DOWN;
       else if (key == ConsoleKey.UpArrow)
         direction = Direction.UP;
+    }
+
+    internal bool Eat(Point food)
+    {
+      Point head = GetNextPoint();
+      // если голова змеи на следующем ходу окажется там где находится еда
+      if (head.IsHit(food))
+      {
+        food.sym = head.sym;
+        pList.Add(food);
+        return true;
+      }
+      else
+        return false;
     }
   }
 }
